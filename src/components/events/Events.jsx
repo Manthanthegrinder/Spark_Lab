@@ -15,7 +15,7 @@ const Events = () => {
             <Button type="primary" onClick={() => setIsEventFromOpen(true)}>
               Create Event
             </Button>
-            <EventsForm isEventFromOpen={isEventFromOpen} />
+            <EventsForm isEventFromOpen={isEventFromOpen} setIsEventFromOpen={setIsEventFromOpen}/>
           </Col>
         </Row>
       </Col>
