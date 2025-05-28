@@ -1,15 +1,11 @@
-
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AdminDashboard from './components/AdminDashboard';
-import LocationsPage from './pages/LocationsPage';
-import EventsPage from './pages/EventsPage';
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AdminDashboard from "./components/AdminDashboard";
+import LocationsPage from "./pages/LocationsPage";
+import EventsPage from "./pages/EventsPage";
 
 const App = () => {
   return (
-   
-      <Router>
+    <Router>
       <Routes>
         <Route path="/" element={<div>Hello</div>} />
         <Route path="/admin" element={<AdminDashboard />}>
@@ -18,7 +14,6 @@ const App = () => {
         </Route>
       </Routes>
     </Router>
-    
   );
 };
 
