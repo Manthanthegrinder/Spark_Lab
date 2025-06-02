@@ -1,15 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, Input, Typography, Row, Col, Divider } from "antd";
 
+import { supabase } from "../../supabaseClient";
 import signInImage from '../../assets/signin_image.png';
 import "./SignIn.css";
 
-const SignIn = function () {
-  const onFinish = function (values) {
-    console.log("Received values:", values);
-    // Add Supabase or other login logic here
-  };
 
+
+
+const SignIn = function () {
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const navigate = useNavigate();
+  
+const onFinish = async function (values) {
+  const { email, password } = values;
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  });
+
+  if (error) {
+    console.error("Login error:", error.message);
+    alert("Login failed: " + error.message);
+  } else {
+    console.log("User signed in:", data);
+    setLoginSuccess(true);
+  }
+};
+
+
+
+useEffect(() => {
+  if (loginSuccess) {
+    navigate("/admin"); // Or wherever you want to send user
+  }
+}, [loginSuccess, navigate]);
   return (
     <Row className="signin-wrapper">
       <Col xs={24} md={15} lg={15} xl={15} xxl={15} className="signin-form-section">
@@ -48,8 +75,8 @@ const SignIn = function () {
             </div>
           </Form>
 
-          <div className="form-row">
-            <Typography.Text>
+          <div className="form-row"> 
+            <Typography.Text className="form-row-navigate">
               Don’t have an account? <a href="/signup">Sign Up</a>
             </Typography.Text>
           </div>
